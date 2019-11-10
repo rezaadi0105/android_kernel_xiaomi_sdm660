@@ -100,6 +100,9 @@ enum dsi_panel_bl_ctrl {
 	BL_PWM,
 	BL_WLED,
 	BL_DCS_CMD,
+#ifdef CONFIG_MACH_HUAQIN
+	BL_I2C_CMD,
+#endif
 	UNKNOWN_CTRL,
 };
 
@@ -492,7 +495,25 @@ struct mdss_dsi_ctrl_pdata {
 	struct mdss_intf_recovery *recovery;
 	struct mdss_intf_recovery *mdp_callback;
 	struct mdss_intf_ulp_clamp *clamp_handler;
-
+#ifdef CONFIG_MACH_HUAQIN
+	struct dsi_panel_cmds CABC_on_cmds;
+	struct dsi_panel_cmds CABC_off_cmds;
+	struct dsi_panel_cmds CE_on_cmds;
+	struct dsi_panel_cmds CE_off_cmds;
+	struct dsi_panel_cmds cold_gamma_cmds;
+	struct dsi_panel_cmds warm_gamma_cmds;
+	struct dsi_panel_cmds default_gamma_cmds;
+	struct dsi_panel_cmds sRGB_on_cmds;
+	struct dsi_panel_cmds sRGB_off_cmds;
+	struct dsi_panel_cmds PM1_cmds;
+	struct dsi_panel_cmds PM2_cmds;
+	struct dsi_panel_cmds PM3_cmds;
+	struct dsi_panel_cmds PM4_cmds;
+	struct dsi_panel_cmds PM5_cmds;
+	struct dsi_panel_cmds PM6_cmds;
+	struct dsi_panel_cmds PM7_cmds;
+	struct dsi_panel_cmds PM8_cmds;
+#endif
 	struct dsi_panel_cmds on_cmds;
 	struct dsi_panel_cmds post_dms_on_cmds;
 	struct dsi_panel_cmds post_panel_on_cmds;
@@ -752,7 +773,8 @@ int mdss_dsi_phy_pll_reset_status(struct mdss_dsi_ctrl_pdata *ctrl);
 int mdss_dsi_check_panel_status(struct mdss_dsi_ctrl_pdata *ctrl, void *arg);
 
 void mdss_dsi_debug_bus_init(struct mdss_dsi_data *sdata);
-#ifdef CONFIG_MACH_LONGCHEER
+#if defined (CONFIG_MACH_LONGCHEER) ||
+	defined (CONFIG_MACH_HUAQIN)
 void mdss_dsi_panel_cmds_send(struct mdss_dsi_ctrl_pdata *ctrl,struct dsi_panel_cmds *pcmds, u32 flags);
 #endif
 static inline const char *__mdss_dsi_pm_name(enum dsi_pm_type module)
