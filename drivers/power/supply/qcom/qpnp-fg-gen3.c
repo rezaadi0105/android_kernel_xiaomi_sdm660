@@ -1124,11 +1124,12 @@ static int fg_get_batt_profile(struct fg_chip *chip)
                 chip->bp.fastchg_curr_ma = 2300;
 #ifdef CONFIG_MACH_XIAOMI_TULIP
         else
-                if (is_poweroff_charge)
-                        if(hwc_check_india)
+                if (is_poweroff_charge) {
+                        if (hwc_check_india)
                                 chip->bp.fastchg_curr_ma = 2200;
                         else
                                 chip->bp.fastchg_curr_ma = 2300;
+                }
 #endif
 #endif
 	rc = of_property_read_u32(profile_node, "qcom,fg-cc-cv-threshold-mv",

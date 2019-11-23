@@ -264,14 +264,15 @@ static int smb2_parse_dt(struct smb2 *chip)
 	if (rc < 0)
 		chg->batt_profile_fcc_ua = -EINVAL;
 #ifdef CONFIG_MACH_LONGCHEER
-        if (hwc_check_global) {
-                chg->batt_profile_fcc_ua = 2300000;
+	if (hwc_check_global) {
+		chg->batt_profile_fcc_ua = 2300000;
 #ifdef CONFIG_MACH_XIAOMI_TULIP
-	        if (is_poweroff_charge)
+		if (is_poweroff_charge) {
 			if (hwc_check_india)
 				chg->batt_profile_fcc_ua = 2200000;
 			else
 				chg->batt_profile_fcc_ua = 2300000;
+		}
 #endif
 	}
 #endif
