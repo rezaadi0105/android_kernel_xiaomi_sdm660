@@ -2023,13 +2023,8 @@ int smblib_set_prop_system_temp_level(struct smb_charger *chg,
 	if ((lct_backlight_off) && (LctIsInCall == 0) && (val->intval > 2))
 		    return 0;
 #elif defined(CONFIG_MACH_XIAOMI_TULIP)
-	if (hwc_check_india) {
-		if ((lct_backlight_off) && (LctIsInCall == 0) && (val->intval > 3))
-			return 0;
-	} else {
-		if ((lct_backlight_off) && (LctIsInCall == 0) && (val->intval > 3))
-			return 0;
-	}
+	if ((lct_backlight_off) && (LctIsInCall == 0) && (val->intval > 3))
+		return 0;
 #else
 	if ((lct_backlight_off) && (LctIsInCall == 0) && (val->intval > 0) && (hwc_check_india == 0))
 	    return 0;
