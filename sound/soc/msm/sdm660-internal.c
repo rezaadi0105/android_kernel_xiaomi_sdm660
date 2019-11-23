@@ -1307,8 +1307,7 @@ static void *def_msm_int_wcd_mbhc_cal(void)
 		return NULL;
 
 #define S(X, Y) ((WCD_MBHC_CAL_PLUG_TYPE_PTR(msm_int_wcd_cal)->X) = (Y))
-#if defined (CONFIG_MACH_LONGCHEER) ||
-	defined (CONFIG_MACH_HUAQIN)
+#if defined (CONFIG_MACH_LONGCHEER) || defined (CONFIG_MACH_HUAQIN)
 	S(v_hs_max, 1600);
 #else
 	S(v_hs_max, 1500);

@@ -9940,8 +9940,7 @@ static const struct snd_kcontrol_new primary_mi2s_rx_port_mixer_controls[] = {
 	SOC_SINGLE_EXT("SLIM_8_TX", MSM_BACKEND_DAI_PRI_MI2S_RX,
 	MSM_BACKEND_DAI_SLIMBUS_8_TX, 1, 0, msm_routing_get_port_mixer,
 	msm_routing_put_port_mixer),
-#if defined (CONFIG_SND_SOC_TAS2557) ||
-	defined (CONFIG_SND_SOC_TAS2557_STEREO)
+#if defined (CONFIG_SND_SOC_TAS2557) || defined (CONFIG_SND_SOC_TAS2557_STEREO)
 	SOC_SINGLE_EXT("INT3_MI2S_TX", MSM_BACKEND_DAI_PRI_MI2S_RX,
 	MSM_BACKEND_DAI_INT3_MI2S_TX, 1, 0, msm_routing_get_port_mixer,
 	msm_routing_put_port_mixer),

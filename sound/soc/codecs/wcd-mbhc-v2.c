@@ -26,8 +26,7 @@
 #include <linux/firmware.h>
 #include <linux/completion.h>
 #include <linux/mfd/msm-cdc-pinctrl.h>
-#if defined (CONFIG_MACH_LONGCHEER) ||
-	defined (CONFIG_MACH_HUAQIN)
+#if defined (CONFIG_MACH_LONGCHEER) || defined (CONFIG_MACH_HUAQIN)
 #include <linux/switch.h>
 #endif
 #include <sound/soc.h>

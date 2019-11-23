@@ -506,8 +506,7 @@ struct fb_info {
 	} *apertures;
 
 	bool skip_vt_switch; /* no VT switch on suspend/resume required */
-#if defined (CONFIG_MACH_LONGCHEER) ||
-	defined (CONFIG_MACH_HUAQIN)
+#if defined (CONFIG_MACH_LONGCHEER) || defined (CONFIG_MACH_HUAQIN)
 	int blank;
 #endif
 };

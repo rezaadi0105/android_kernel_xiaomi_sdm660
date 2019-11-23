@@ -55,8 +55,7 @@
 #include "mdss_debug.h"
 #include "mdss_smmu.h"
 #include "mdss_mdp.h"
-#if defined (CONFIG_MACH_LONGCHEER) ||
-	defined (CONFIG_MACH_HUAQIN)
+#if defined (CONFIG_MACH_LONGCHEER) || defined (CONFIG_MACH_HUAQIN)
 #include <linux/mdss_io_util.h>
 #include <linux/wakelock.h>
 #include "mdss_dsi.h"
@@ -150,8 +149,7 @@ static inline uint64_t __user to_user_u64(void *ptr)
 {
 	return (uint64_t)((uintptr_t)ptr);
 }
-#if defined (CONFIG_MACH_LONGCHEER) ||
-	defined (CONFIG_MACH_HUAQIN)
+#if defined (CONFIG_MACH_LONGCHEER) || defined (CONFIG_MACH_HUAQIN)
 #define WAIT_RESUME_TIMEOUT 200
 static struct fb_info *prim_fbi;
 static struct delayed_work prim_panel_work;
@@ -2300,8 +2298,7 @@ static int mdss_fb_remove(struct platform_device *pdev)
 
 	if (!mfd)
 		return -ENODEV;
-#if defined (CONFIG_MACH_LONGCHEER) ||
-	defined (CONFIG_MACH_HUAQIN)
+#if defined (CONFIG_MACH_LONGCHEER) || defined (CONFIG_MACH_HUAQIN)
 	if (mfd->panel_info && mfd->panel_info->is_prim_panel) {
 		atomic_set(&prim_panel_is_on, false);
 		cancel_delayed_work_sync(&prim_panel_work);
@@ -2483,8 +2480,7 @@ static int mdss_fb_resume(struct platform_device *pdev)
 #endif
 
 #ifdef CONFIG_PM_SLEEP
-#if defined (CONFIG_MACH_LONGCHEER) ||
-	defined (CONFIG_MACH_HUAQIN)
+#if defined (CONFIG_MACH_LONGCHEER) || defined (CONFIG_MACH_HUAQIN)
 static int mdss_fb_pm_prepare(struct device *dev)
 {
 	struct msm_fb_data_type *mfd = dev_get_drvdata(dev);
@@ -2563,8 +2559,7 @@ static int mdss_fb_pm_resume(struct device *dev)
 #endif
 
 static const struct dev_pm_ops mdss_fb_pm_ops = {
-#if defined (CONFIG_MACH_LONGCHEER) ||
-	defined (CONFIG_MACH_HUAQIN)
+#if defined (CONFIG_MACH_LONGCHEER) || defined (CONFIG_MACH_HUAQIN)
 	.prepare = mdss_fb_pm_prepare,
 	.complete = mdss_fb_pm_complete,
 #endif
@@ -3019,8 +3014,7 @@ static int mdss_fb_blank(int blank_mode, struct fb_info *info)
 	int ret;
 	struct mdss_panel_data *pdata;
 	struct msm_fb_data_type *mfd = (struct msm_fb_data_type *)info->par;
-#if defined (CONFIG_MACH_LONGCHEER) ||
-	defined (CONFIG_MACH_HUAQIN)
+#if defined (CONFIG_MACH_LONGCHEER) || defined (CONFIG_MACH_HUAQIN)
 	if ((info == prim_fbi) && (blank_mode == FB_BLANK_UNBLANK) &&
 		atomic_read(&prim_panel_is_on)) {
 		atomic_set(&prim_panel_is_on, false);
@@ -3665,8 +3659,7 @@ static int mdss_fb_register(struct msm_fb_data_type *mfd)
 	atomic_set(&mfd->commits_pending, 0);
 	atomic_set(&mfd->ioctl_ref_cnt, 0);
 	atomic_set(&mfd->kickoff_pending, 0);
-#if defined (CONFIG_MACH_LONGCHEER) ||
-	defined (CONFIG_MACH_HUAQIN)
+#if defined (CONFIG_MACH_LONGCHEER) || defined (CONFIG_MACH_HUAQIN)
 	atomic_set(&mfd->resume_pending, 0);
 #endif
 	init_timer(&mfd->no_update.timer);
@@ -3683,8 +3676,7 @@ static int mdss_fb_register(struct msm_fb_data_type *mfd)
 	init_waitqueue_head(&mfd->idle_wait_q);
 	init_waitqueue_head(&mfd->ioctl_q);
 	init_waitqueue_head(&mfd->kickoff_wait_q);
-#if defined (CONFIG_MACH_LONGCHEER) ||
-	defined (CONFIG_MACH_HUAQIN)
+#if defined (CONFIG_MACH_LONGCHEER) || defined (CONFIG_MACH_HUAQIN)
 	init_waitqueue_head(&mfd->resume_wait_q);
 #endif
 	ret = fb_alloc_cmap(&fbi->cmap, 256, 0);
@@ -3703,8 +3695,7 @@ static int mdss_fb_register(struct msm_fb_data_type *mfd)
 	mdss_panel_debugfs_init(panel_info, panel_name);
 	pr_info("FrameBuffer[%d] %dx%d registered successfully!\n", mfd->index,
 					fbi->var.xres, fbi->var.yres);
-#if defined (CONFIG_MACH_LONGCHEER) ||
-	defined (CONFIG_MACH_HUAQIN)
+#if defined (CONFIG_MACH_LONGCHEER) || defined (CONFIG_MACH_HUAQIN)
 	if (panel_info->is_prim_panel) {
 		prim_fbi = fbi;
 		atomic_set(&prim_panel_is_on, false);
@@ -6219,8 +6210,7 @@ void mdss_fb_report_panel_dead(struct msm_fb_data_type *mfd)
 		KOBJ_CHANGE, envp);
 	pr_err("Panel has gone bad, sending uevent - %s\n", envp[0]);
 }
-#if defined (CONFIG_MACH_LONGCHEER) ||
-	defined (CONFIG_MACH_HUAQIN)
+#if defined (CONFIG_MACH_LONGCHEER) || defined (CONFIG_MACH_HUAQIN)
 /*
  * mdss_prim_panel_fb_unblank() - Unblank primary panel FB
  * @timeout : >0 blank primary panel FB after timeout (ms)
