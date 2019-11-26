@@ -2013,12 +2013,13 @@ int smblib_set_prop_system_temp_level(struct smb_charger *chg,
 #endif
 		lct_therm_lvl_reserved.intval = val->intval;
 #ifdef CONFIG_MACH_XIAOMI_WHYRED
-		if (hwc_check_india)
+		if (hwc_check_india) {
 			if ((lct_backlight_off) && (LctIsInCall == 0) && (val->intval > 2))
 				return 0;
-		else
-			if ((lct_backlight_off) && (LctIsInCall == 0) && (val->intval > 1)) {
+		} else {
+			if ((lct_backlight_off) && (LctIsInCall == 0) && (val->intval > 1))
 				return 0;
+		}
 #elif defined(CONFIG_MACH_XIAOMI_WAYNE)
 	if ((lct_backlight_off) && (LctIsInCall == 0) && (val->intval > 2))
 		    return 0;
